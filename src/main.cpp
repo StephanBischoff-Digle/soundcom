@@ -10,10 +10,10 @@
 
 
 int main() {    
-    std::string data = "Hello World!";
+    std::string data = "+";
     
     
-    Device device(1000, 48000, 10);
+    Device device(1000, 48000, 5);
     Dataframe frame;
     frame.setData(data);
     
