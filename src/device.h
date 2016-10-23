@@ -32,5 +32,6 @@ public:
         devicename_(devicename) {};
     
     void send(const Dataframe& frame);
+    void receive(Dataframe& frame);
     
 };
