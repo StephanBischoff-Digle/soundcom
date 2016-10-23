@@ -11,7 +11,7 @@ private:
 public:
     
     void setData(const std::string& data);
-    void setBinaryData(const std::vector<bool>& data);
+    //void setBinaryData(const std::vector<bool>& data);
     const std::vector<bool>& getDataFrame() const {return data_;}
-    const std::string& getData();
+    //const std::string& getData();
 };

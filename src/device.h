@@ -8,13 +8,16 @@
 
 class Device {
 private:
+    enum accesstype {
+        READ, WRITE
+    };
     snd_pcm_t * handler_;
     unsigned int frequency_;
     unsigned int samples_;
     unsigned int baud_;
     std::string devicename_;    
     
-    bool open(snd_pcm_t ** handler);
+    bool open(snd_pcm_t ** handler, accesstype actype);
     void close();
 
 public:
@@ -32,6 +35,6 @@ public:
         devicename_(devicename) {};
     
     void send(const Dataframe& frame);
-    void receive(Dataframe& frame);
+    void receive();
     
 };

@@ -1,21 +1,40 @@
 #include "device.h"
 
 #include <cmath>
+#include <iostream>
 
-bool Device::open(snd_pcm_t ** handler) {
+bool Device::open(snd_pcm_t ** handler, accesstype actype) {
     int err;
-    if((err = snd_pcm_open(handler, 
-            devicename_.data(), 
-            SND_PCM_STREAM_PLAYBACK, 0)) < 0)
-        return false;
     
-    if((err = snd_pcm_set_params(*handler,
-            SND_PCM_FORMAT_FLOAT,
-            SND_PCM_ACCESS_RW_INTERLEAVED,
-            1,
-            samples_,
-            1, 500000)) < 0) 
+    if(actype == accesstype::WRITE) {
+        if((err = snd_pcm_open(handler, 
+                devicename_.data(), 
+                SND_PCM_STREAM_PLAYBACK, 0)) < 0)
+            return false;
+        
+        if((err = snd_pcm_set_params(*handler,
+                SND_PCM_FORMAT_FLOAT,
+                SND_PCM_ACCESS_RW_INTERLEAVED,
+                1,
+                samples_,
+                1, 500000)) < 0) 
+            return false;
+    } else if(actype == accesstype::READ) {
+        if((err = snd_pcm_open(handler,
+                devicename_.data(),
+                SND_PCM_STREAM_CAPTURE, 0)) < 0)
+            return false;
+        
+        if((err = snd_pcm_set_params(*handler,
+                SND_PCM_FORMAT_FLOAT,
+                SND_PCM_ACCESS_RW_INTERLEAVED,
+                1,
+                samples_,
+                1, 500000)) < 0)
+            return false;
+    } else {
         return false;
+    }
     
     return true;
 }
@@ -27,7 +46,7 @@ void Device::close() {
 
 void Device::send(const Dataframe& frame)
 {
-    if(!open(&handler_))
+    if(!open(&handler_, accesstype::WRITE))
         return;
     
     
@@ -46,6 +65,27 @@ void Device::send(const Dataframe& frame)
     }
     
     snd_pcm_writei(handler_, buffer, buffersize);
+    
+    close();
+}
+
+
+void Device::receive() {
+    if(!open(&handler_, accesstype::READ))
+        return;
+    
+    float buffer[samples_];
+    long framesize = samples_/2;
+    int err;
+    for(auto i = 0; i < 10; i++) {
+        if((err = snd_pcm_readi(handler_, buffer, framesize)) != framesize) {
+            std::cout << "failed to read data" << std::endl;
+        } else {
+            for(auto k = 0; k < framesize; k++) {
+                std::cout << buffer[k] << std::endl;
+            }
+        }
+    }
     
     close();
 }

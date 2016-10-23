@@ -17,7 +17,8 @@ int main() {
     Dataframe frame;
     frame.setData(data);
     
-    device.send(frame);
+    //device.send(frame);
+    device.receive();
     
     
     
