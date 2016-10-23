@@ -3,12 +3,8 @@
 Soundcom is an application used for data transmission via sound waves.
 The application is intended to be used with the Nao platform.
 
-## Current implementation
+## ToDo Branch: `feature - send`
 
-The current state is as follows:
-
- - Transmission is readyish
-   - a data string can be send via phase shift keying
-   - samples, baud and frequency is customizable
-   - no protocol is implemented jet
- - unable to receive
+-   [ ] implement [QPSK](https://en.wikipedia.org/wiki/Phase-shift_keying#Quadrature_phase-shift_keying_.28QPSK.29) instead of [BPSK](https://en.wikipedia.org/wiki/Phase-shift_keying#Binary_phase-shift_keying_.28BPSK.29) as [DPSK](https://en.wikipedia.org/wiki/Phase-shift_keying#Differential_phase-shift_keying_.28DPSK.29)
+-   [ ] change from hard to soft shifting
+-   [ ] implement error resistant protocol
