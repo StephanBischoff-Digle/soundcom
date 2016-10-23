@@ -33,7 +33,7 @@ void Device::send(const Dataframe& frame)
     
     unsigned long buffersize = samples_ / baud_ * frame.getDataFrame().size();
     float buffer[buffersize];
-    float phaseshift = (frame.getDataFrame()[0] ? M_PI/2 : -M_PI/2);
+    float phaseshift = (frame.getDataFrame()[0] ? M_PI/4 : -M_PI/4);
     
     int k = 0;
     for(unsigned long i = 0; i < buffersize; i++) {
@@ -41,7 +41,7 @@ void Device::send(const Dataframe& frame)
         
         if(i % (buffersize / frame.getDataFrame().size()) == 0) {
             k++;
-            phaseshift = (frame.getDataFrame()[k] ? M_PI/2 : -M_PI/2);
+            phaseshift = (frame.getDataFrame()[k] ? M_PI/4 : -M_PI/4);
         }
     }
     
