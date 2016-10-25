@@ -17,6 +17,7 @@ set(HEADERS
     ${HEADERS}
     src/dataframe.h
     src/device.h
+    src/modem.h
     )
 
 add_executable(soundcom ${SOURCE} ${HEADERS})
