@@ -11,6 +11,7 @@ set(SOURCE
     src/main.cpp
     src/dataframe.cpp
     src/device.cpp
+    src/psh_modem.cpp
     )
     
 set(HEADERS
@@ -18,6 +19,7 @@ set(HEADERS
     src/dataframe.h
     src/device.h
     src/modem.h
+    src/psh_modem.h
     )
 
 add_executable(soundcom ${SOURCE} ${HEADERS})
