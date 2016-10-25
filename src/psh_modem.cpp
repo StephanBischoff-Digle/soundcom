@@ -1,4 +1,4 @@
-#include <math>
+#include <cmath>
 
 #include "psh_modem.h"
 
@@ -8,7 +8,7 @@ std::vector<float> PSHModem::modulate(Dataframe frame) const {
     return signal;
 }
 
-Dataframe PSHModem::demodulate(int signal) const {
+Dataframe PSHModem::demodulate(std::vector<float> signal) const {
     Dataframe data;
     return data;
 }
