@@ -3,12 +3,9 @@
 Soundcom is an application used for data transmission via sound waves.
 The application is intended to be used with the Nao platform.
 
-## Current implementation
+## Usage
 
-The current state is as follows:
+Command-Line-Parameters:
 
- - Transmission is readyish
-   - able to transmit a data string
-   - parameters can be set via magic numbers
-   - code is in C-style
- - unable to receive
+-   `-r` to record 5 seconds of audio from the default microphone and dump its fourier transformation as csv into the shell.
+-   `-s` sends _"Hello World"_ via the `psh_modem` over the default loudspeakers.
