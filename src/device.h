@@ -5,31 +5,26 @@
 #include <string>
 
 #include "dataframe.h"
+#include "modem.h"
 
 class Device {
 private:
     snd_pcm_t * handler_;
-    unsigned int frequency_;
-    unsigned int samples_;
-    unsigned int baud_;
-    std::string devicename_;    
+    std::string devicename_;
+    std::shared_ptr<Modem> modem_;
     
     bool open(snd_pcm_t ** handler);
     void close();
 
 public:
-    Device(unsigned int frequency, unsigned int samples, unsigned int baud) :
+    Device(std::shared_ptr<Modem> modem) :
         handler_(nullptr),
-        frequency_(frequency),
-        samples_(samples),
-        baud_(baud),
-        devicename_("default") {};
-    Device(std::string devicename, unsigned int frequency, unsigned int samples, unsigned int baud) :
+        devicename_("default"),
+        modem_(move(modem)) {};
+    Device(std::string devicename, std::shared_ptr<Modem> modem) :
         handler_(nullptr),
-        frequency_(frequency),
-        samples_(samples),
-        baud_(baud),
-        devicename_(devicename) {};
+        devicename_(devicename),
+        modem_(move(modem)) {};
     
     void send(const Dataframe& frame);
     
