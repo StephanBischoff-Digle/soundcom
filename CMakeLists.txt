@@ -4,7 +4,7 @@ project(soundcom)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-set(CMAKE_CXX_FLAGS "-std=c++11 -Wall -Werror -lasound")
+set(CMAKE_CXX_FLAGS "-std=c++11 -Wall -Werror -lasound -lfftw3")
 
 set(SOURCE
     ${SOURCE}
