@@ -10,18 +10,26 @@
 #include "psh_modem.h"
 
 
-int main() {    
+int main(int argc, char** argv) {
+
     std::string data = "Hello World!";
-    
-    std::shared_ptr<PSHModem> modem(new PSHModem(1000, 48000, 10));
-    
+
+    std::shared_ptr<PSHModem> modem(new PSHModem(1000, 48000, 20));
+
     Device device(modem);
     Dataframe frame;
     frame.setData(data);
-    
-    device.send(frame);
-    
-    
-    
+
+
+    if(argc > 1) {
+        if(std::string(argv[1]) == "-s") {
+            device.send(frame);
+        } else if(std::string(argv[1]) == "-r") {
+            device.receive();
+        }
+    }
+
+
+
     return 0;
 }
