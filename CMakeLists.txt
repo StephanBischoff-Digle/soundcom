@@ -4,7 +4,7 @@ project(soundcom)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-set(CMAKE_CXX_FLAGS "-std=c++11 -Wall -Werror -lasound -lfftw3")
+set(CMAKE_CXX_FLAGS "-std=c++14 -Wall -Werror -lasound -lfftw3")
 
 set(SOURCE
     ${SOURCE}
@@ -21,6 +21,8 @@ set(HEADERS
     src/modem.h
     src/psh_modem.h
     )
+    
+
 
 add_executable(soundcom ${SOURCE} ${HEADERS})
 
